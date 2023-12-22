@@ -5,18 +5,21 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 
+import userRoutes from './routes/userRoutes.js';
+
 dotenv.config();
 
 const app = express();
 
 
 // Middlewares
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(morgan('dev'));
+// app.use(bodyParser.json())
+app.use(cors())
 
 // Routes
 app.get('/', (req, res) => {
@@ -26,5 +29,11 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/api/v1/users', userRoutes);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, message: 'Something went wrong!' });
+});
 
 export default app;

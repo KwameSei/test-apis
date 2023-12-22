@@ -10,11 +10,11 @@ class User {
         name,
         email,
         password,
-        role
+        role_id: role
       });
       return userId;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -24,7 +24,7 @@ class User {
       const user = await knexConnection('users').where({ email }).first();
       return user;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -34,7 +34,7 @@ class User {
       const user = await knexConnection('users').where({ id }).first();
       return user;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -44,7 +44,7 @@ class User {
       const users = await knexConnection('users');
       return users;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -59,7 +59,7 @@ class User {
       });
       return user;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -69,7 +69,7 @@ class User {
       const user = await knexConnection('users').where({ id }).del();
       return user;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 }

@@ -1,4 +1,4 @@
-import knexConnection from "../database/mysql_connect";
+import knexConnection from "../database/mysql_connect.js";
 
 // creating appLinks model
 class appLinks {
