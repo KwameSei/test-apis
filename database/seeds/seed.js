@@ -1,4 +1,3 @@
-import e from "express";
 import knexConnection from "../mysql_connect.js";
 import { seedAppLinks, seedPermissions, seedRolePermissions, seedRoles, seedUsers } from "./seed-data.js";
 

@@ -10,7 +10,10 @@
     "migrate": "node ./database/actions/run-migrations.js",
     "create-migration": "node ./database/actions/create-migrations.js",
     "rollback": "node ./database/actions/rollback-migrations.js",
-    "seed": "node ./database/seeds/seed.js"
+    "seed": "node ./database/seeds/seed.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "https://github.com/KwameSei/test-apis.git",
   "author": "KwameSei <nathanielosei92@gmail.com>",

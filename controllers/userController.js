@@ -2,7 +2,6 @@ import jsonwebtoken from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../models/userModel.js';
 import dotenv from 'dotenv';
-import e from 'express';
 
 dotenv.config();
 
