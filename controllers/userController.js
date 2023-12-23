@@ -10,9 +10,9 @@ class UserController {
   // Register user
   static async registerUser(req, res) {
     try {
-      const { name, email, password, role } = req.body;
+      console.error('Request body', req.body);
 
-      console.log(req.body);
+      const { name, email, password, role } = req.body;
     
       // Validate user input
       if (!name || !email || !password) {
@@ -32,11 +32,13 @@ class UserController {
         })
       }
 
+      console.error('User input validated', JSON.stringify(req.body, null, 2));
+
       // Convert email to lower case
       const emailToLower = email.toLowerCase();
 
       // Check if user exists
-      const userExists = await User.getUserByEmail({email: emailToLower});
+      const userExists = await User.getUserByEmail(emailToLower);
       if (userExists) {
         return res.status(409).json({
           status: 'error',
@@ -44,12 +46,16 @@ class UserController {
         });
       }
 
+      console.error('User exists: ', userExists);
+
       // Hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
       // Create user
       const userId = await User.createUser(name, email, hashedPassword, role);
+
+      console.error(userId);
       
       // Create token
       const token = jsonwebtoken.sign({ id: userId }, process.env.JWT_SECRET, {
@@ -69,6 +75,7 @@ class UserController {
         }
       });
     } catch (error) {
+      console.error('Error registering user: ', error);
       return res.status(500).json({
         status: 'error',
         error: error.message
