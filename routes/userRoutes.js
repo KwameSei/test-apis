@@ -13,6 +13,6 @@ router.post('/login', userController.loginUser);
 // router.get('/users', authentication, userController.getAllUsers);
 
 // Admin routes (authentication and authorization required)
-router.post('/register', authentication, authorization, userController.registerUser);
+router.post('/register', authentication, authorization([1]), userController.registerUser);
 
 export default router;

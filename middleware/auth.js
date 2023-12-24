@@ -21,13 +21,13 @@ export const authentication = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Find user by id
-    const user = await User.getUserById(decoded.id);
+    const user = await User.getUserById(decoded.id.id);
 
     // Check if user exists
     if (!user) {
       return res.status(404).json({
         status: 'error',
-        error: 'User not found'
+        error: 'User not found or missing role information'
       });
     }
 
@@ -36,6 +36,7 @@ export const authentication = async (req, res, next) => {
 
     // Call next middleware
     next();
+
   } catch (error) {
     return res.status(401).json({
       status: 'error',
@@ -48,13 +49,11 @@ export const authentication = async (req, res, next) => {
 export const authorization = (roles) => {
   return (req, res, next) => {
 
-    const { role } = req.user;
-    
-    // Check if user role is in the roles array
-    if (!roles.includes(role)) {
+    // Check if user role matches any of the required roles
+    if (!roles.includes(req.user.role_id)) {
       return res.status(403).json({
         status: 'error',
-        error: 'You are not authorized to perform this action'
+        error: 'You are not authorized to access this resource'
       });
     }
 

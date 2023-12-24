@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 
 import userRoutes from './routes/userRoutes.js';
+import appLinksRoutes from './routes/appLinksRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/app', appLinksRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

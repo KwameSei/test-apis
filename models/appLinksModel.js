@@ -3,17 +3,19 @@ import knexConnection from "../database/mysql_connect.js";
 // creating appLinks model
 class appLinks {
   // Create AppLinks
-  static async createApplinks(userId, name, link, url) {
+  static async createApplinks(name, icon, url, userId) {
     try {
       const appLinkId = await knexConnection('app_links').insert({
-        user_id: userId,
         name,
-        link,
-        url
+        icon,
+        user_id: userId,
+        url,
       });
+
       return appLinkId;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -21,9 +23,11 @@ class appLinks {
   static async getAppLinksByUserId(userId) {
     try {
       const appLinks = await knexConnection('app_links').where({ user_id: userId });
+      
       return appLinks;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -31,9 +35,23 @@ class appLinks {
   static async getAppLinksById(id) {
     try {
       const appLinks = await knexConnection('app_links').where({ id }).first();
+      
       return appLinks;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
+    }
+  }
+
+  // Get AppLinks by name
+  static async getAppLinksByName(name) {
+    try {
+      const appLinks = await knexConnection('app_links').where({ name }).first();
+      
+      return appLinks;
+
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -41,24 +59,28 @@ class appLinks {
   static async getAllAppLinks() {
     try {
       const appLinks = await knexConnection('app_links');
+
       return appLinks;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
   // Update AppLinks
-  static async updateAppLinks(id, userId, name, link, url) {
+  static async updateAppLinks(id, name, icon, url, userId) {
     try {
       const appLinks = await knexConnection('app_links').where({ id }).update({
-        user_id: userId,
         name,
-        link,
+        icon,
+        user_id: userId,
         url
       });
+
       return appLinks;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -66,9 +88,11 @@ class appLinks {
   static async deleteAppLinks(id) {
     try {
       const appLinks = await knexConnection('app_links').where({ id }).del();
+      
       return appLinks;
+
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 
@@ -78,7 +102,7 @@ class appLinks {
       const appLinks = await knexConnection('app_links').del();
       return appLinks;
     } catch (error) {
-      throw new error(error);
+      throw error;
     }
   }
 }

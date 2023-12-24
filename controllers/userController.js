@@ -58,14 +58,14 @@ class UserController {
       console.error(userId);
       
       // Create token
-      const token = jsonwebtoken.sign({ id: userId }, process.env.JWT_SECRET, {
+      const newToken = jsonwebtoken.sign({ id: userId }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN
       });
 
       return res.status(201).json({
         status: 'success',
         data: {
-          token,
+          token: newToken,
           user: {
             id: userId,
             name,
@@ -119,16 +119,16 @@ class UserController {
       }
 
       // Create token
-      const token = jsonwebtoken.sign({ id: user.id }, process.env.JWT_SECRET, {
+      const newToken = jsonwebtoken.sign({ id: user, role: user.role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN
       });
 
       return res.status(200).json({
         status: 'success',
         data: {
-          token,
+          token: newToken,
           user: {
-            id: user.id,
+            id: user,
             name: user.name,
             email: emailToLower,
             role: user.role

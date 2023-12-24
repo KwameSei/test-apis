@@ -35,6 +35,7 @@ class User {
       const user = await knexConnection('users').where({ id }).first();
       return user;
     } catch (error) {
+      console.error('Error getting user by id:', error);
       throw error;
     }
   }

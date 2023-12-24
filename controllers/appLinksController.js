@@ -1,13 +1,19 @@
-import appLinks from "../models/appLinksModel";
+import appLinks from "../models/appLinksModel.js";
 
 // Create AppLinks Controller
 class AppLinksController {
   // Create appLinks
-  static async createAppLinks(req, res) {
+  static async createApp(req, res) {
     try {
       console.error('Request body', req.body);
 
-      const { name, url, icon, userId } = req.body;
+      const { name, url, icon } = req.body;
+      const userId = req.user.id;
+
+      console.log('name:', name);
+      console.log('url:', url);
+      console.log('icon:', icon);
+      console.log('userId:', userId);
     
       // Validate user input
       if (!name || !url || !icon) {
@@ -28,17 +34,17 @@ class AppLinksController {
         })
       }
 
-      const appLinks = await appLinks.createAppLinks(name, url, icon, userId);
+      const apps = await appLinks.createApplinks(name, icon, url, userId);
       
       return res.status(201).json({
         success: true,
         status: 201,
         message: 'App Link created successfully',
         data: [{
-          id: appLinks,
+          id: apps,
           name,
-          url,
           icon,
+          url,
           user_id: userId
         }]
       });
@@ -56,9 +62,9 @@ class AppLinksController {
   static async getAllAppLinks(req, res) {
     try {
 
-      const appLinks = await appLinks.getAllAppLinks();
+      const apps = await appLinks.getAllAppLinks();
 
-      if (appLinks.length < 1) {
+      if (apps.length < 1) {
         return res.status(404).json({
           success: false,
           status: 404,
@@ -70,7 +76,7 @@ class AppLinksController {
         success: true,
         status: 200,
         message: 'Apps retrieved successfully',
-        data: appLinks
+        data: apps
       });
     } catch (error) {
       console.error(error);
@@ -87,9 +93,9 @@ class AppLinksController {
     try {
 
       const { id } = req.params;
-      const appLinks = await appLinks.getAppLinksById(id);
+      const apps = await appLinks.getAppLinksById(id);
 
-      if (!appLinks) {
+      if (!apps) {
         return res.status(404).json({
           success: false,
           status: 404,
@@ -101,7 +107,7 @@ class AppLinksController {
         success: true,
         status: 200,
         message: 'App retrieved successfully',
-        data: appLinks
+        data: apps
       });
     } catch (error) {
       console.error(error);
@@ -117,10 +123,11 @@ class AppLinksController {
   static async updateAppLinks(req, res) {
     try {
       const { id } = req.params;
-      const { name, icon, url, userId } = req.body;
+      const userId = req.user.id;
+      const { name, icon, url } = req.body;
 
-      const appLinks = await appLinks.getAppLinksById(id);
-      if (!appLinks) {
+      const apps = await appLinks.getAppLinksById(id);
+      if (!apps) {
         return res.status(404).json({
           success: false,
           status: 404,
@@ -136,8 +143,8 @@ class AppLinksController {
         data: [{
           id: updatedAppLinks,
           name,
-          url,
           icon,
+          url,
           user_id: userId
         }]
       });
@@ -152,19 +159,19 @@ class AppLinksController {
   }
 
   // Delete appLinks
-  static async deleteAppLinks(req, res) {
+  static async deleteApp(req, res) {
     try {
       const { id } = req.params;
 
-      const appLinks = await appLinks.getAppLinksById(id);
-      if (!appLinks) {
+      const apps = await appLinks.getAppLinksById(id);
+      if (!apps) {
         return res.status(404).json({
           success: false,
           status: 404,
           message: 'AppLinks not found'
         });
       }
-      
+
       await appLinks.deleteAppLinks(id);
       return res.status(200).json({
         success: true,
