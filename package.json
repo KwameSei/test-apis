@@ -13,7 +13,7 @@
     "seed": "node ./database/seeds/seed.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon server.js"
   },
   "repository": "https://github.com/KwameSei/test-apis.git",
   "author": "KwameSei <nathanielosei92@gmail.com>",
