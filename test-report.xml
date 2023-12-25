@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js">
-    <testCase name="Create App Links Operation should create app links" duration="63">
+    <testCase name="Create App Links Operation should create app links" duration="67">
       <failure message="TypeError: Cannot read properties of undefined (reading &apos;address&apos;)"><![CDATA[TypeError: Cannot read properties of undefined (reading 'address')
     at Test.serverAddress (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:46:22)
     at new Test (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:34:14)

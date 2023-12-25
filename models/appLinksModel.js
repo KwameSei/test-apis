@@ -1,20 +1,35 @@
 import knexConnection from "../database/mysql_connect.js";
+import * as yup from 'yup';
+
+// creating app validation schema
+const appValidationSchema = yup.object().shape({
+  name: yup.string().required(),
+  icon: yup.string().required(),
+  url: yup.string().required(),
+  user_id: yup.number().required()
+});
 
 // creating appLinks model
 class appLinks {
   // Create AppLinks
-  static async createApplinks(name, icon, url, userId) {
+
+  static async createAppLinks(name, icon, url, userId) {
     try {
-      const appLinkId = await knexConnection('app_links').insert({
-        name,
-        icon,
-        user_id: userId,
-        url,
-      });
+      const app_validate = { name, icon, url, user_id: userId };
+      await appValidationSchema.validate(app_validate);
 
+      const appLinkId = await knexConnection('app_links').insert(appLinks);
+      
       return appLinkId;
-
     } catch (error) {
+      // Handle validation errors
+      if (error.name === 'ValidationError') {
+        const validationErrors = error.errors.map((err) => ({
+          field: err.path,
+          message: err.message
+        }));
+        throw { status: 400, message: 'Validation errors', errors: validationErrors };
+      }
       throw error;
     }
   }
@@ -36,6 +51,10 @@ class appLinks {
     try {
       const appLinks = await knexConnection('app_links').where({ id }).first();
       
+      if (!appLinks) {
+        throw { status: 404, message: 'Apps not found' };
+      }
+
       return appLinks;
 
     } catch (error) {
@@ -60,6 +79,10 @@ class appLinks {
     try {
       const appLinks = await knexConnection('app_links');
 
+      if (!appLinks) {
+        throw { status: 404, message: 'Apps not found' };
+      }
+
       return appLinks;
 
     } catch (error) {
@@ -67,19 +90,24 @@ class appLinks {
     }
   }
 
-  // Update AppLinks
   static async updateAppLinks(id, name, icon, url, userId) {
     try {
-      const appLinks = await knexConnection('app_links').where({ id }).update({
-        name,
-        icon,
-        user_id: userId,
-        url
-      });
+      const app_validate = { name, icon, url, user_id: userId };
+      await appValidationSchema.validate(app_validate);
 
+      const appLinks = await knexConnection('app_links').where({ id }).update(appLinks);
+      
       return appLinks;
-
+      
     } catch (error) {
+      // Handle validation errors
+      if (error.name === 'ValidationError') {
+        const validationErrors = error.errors.map((err) => ({
+          field: err.path,
+          message: err.message
+        }));
+        throw { status: 400, message: 'Validation errors', errors: validationErrors };
+      }
       throw error;
     }
   }
@@ -88,6 +116,10 @@ class appLinks {
   static async deleteAppLinks(id) {
     try {
       const appLinks = await knexConnection('app_links').where({ id }).del();
+
+      if (!appLinks) {
+        throw { status: 404, message: 'App not found' };
+      }
       
       return appLinks;
 
@@ -100,7 +132,13 @@ class appLinks {
   static async deleteAllAppLinks() {
     try {
       const appLinks = await knexConnection('app_links').del();
+
+      if (!appLinks) {
+        throw { status: 404, message: 'Apps not found' };
+      }
+
       return appLinks;
+      
     } catch (error) {
       throw error;
     }

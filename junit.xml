@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="1" errors="0" time="48.831">
-  <testsuite name="Create App Links Operation" errors="0" failures="1" skipped="0" timestamp="2023-12-25T10:06:59" time="47.682" tests="1">
-    <testcase classname="Create App Links Operation should create app links" name="Create App Links Operation should create app links" time="0.063">
+<testsuites name="jest tests" tests="1" failures="1" errors="0" time="54.22">
+  <testsuite name="Create App Links Operation" errors="0" failures="1" skipped="0" timestamp="2023-12-25T12:57:46" time="52.955" tests="1">
+    <testcase classname="Create App Links Operation should create app links" name="Create App Links Operation should create app links" time="0.067">
       <failure>TypeError: Cannot read properties of undefined (reading &apos;address&apos;)
     at Test.serverAddress (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:46:22)
     at new Test (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:34:14)

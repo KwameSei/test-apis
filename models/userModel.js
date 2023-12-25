@@ -1,20 +1,48 @@
 // import poolConnect from "../database/db.js";
 import knexConnection from "../database/mysql_connect.js";
+import * as yup from 'yup';
+
+// creating user schema
+const userValidationSchema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).max(30).required(),
+  role: yup.number().required()
+});
 
 // creating user model
 class User {
   // Create user
+  // static async createUser(name, email, password, role) {
+  //   try {
+  //     const userId = await knexConnection('users').insert({
+  //       name,
+  //       email,
+  //       password,
+  //       role_id: role
+  //     });
+  //     return userId;
+  //   } catch (error) {
+  //     console.error('Error creating user:', error);
+  //     throw error;
+  //   }
+  // }
+
   static async createUser(name, email, password, role) {
     try {
-      const userId = await knexConnection('users').insert({
-        name,
-        email,
-        password,
-        role_id: role
-      });
+      const user = { name, email, password, role_id: role };
+      await userValidationSchema.validate(user);
+      const userId = await knexConnection('users').insert(user);
       return userId;
     } catch (error) {
-      console.error('Error creating user:', error);
+      // Handle validation errors
+      if (error.name === 'ValidationError') {
+        const validationErrors = error.errors.map((err) => ({
+          field: err.path,
+          message: err.message
+        }));
+        throw { status: 400, message: 'Validation errors', errors: validationErrors };
+      }
       throw error;
     }
   }
@@ -29,13 +57,14 @@ class User {
     }
   }
 
-  // Get user by id
   static async getUserById(id) {
     try {
       const user = await knexConnection('users').where({ id }).first();
+      if (!user) {
+        throw { status: 404, message: 'User not found' };
+      }
       return user;
     } catch (error) {
-      console.error('Error getting user by id:', error);
       throw error;
     }
   }
@@ -50,25 +79,31 @@ class User {
     }
   }
 
-  // Update user
   static async updateUser(id, name, email, password, role) {
     try {
-      const user = await knexConnection('users').where({ id }).update({
-        name,
-        email,
-        password,
-        role
-      });
-      return user;
+      const user = { name, email, password, role_id: role };
+      await userValidationSchema.validate(user);
+      const updatedUser = await knexConnection('users').where({ id }).update(user);
+      return updatedUser;
     } catch (error) {
+      // Handle validation errors
+      if (error.name === 'ValidationError') {
+        const validationErrors = error.errors.map((err) => ({
+          field: err.path,
+          message: err.message
+        }));
+        throw { status: 400, message: 'Validation errors', errors: validationErrors };
+      }
       throw error;
     }
   }
 
-  // Delete user
   static async deleteUser(id) {
     try {
       const user = await knexConnection('users').where({ id }).del();
+      if (!user) {
+        throw { status: 404, message: 'User not found' };
+      }
       return user;
     } catch (error) {
       throw error;

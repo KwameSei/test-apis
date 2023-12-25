@@ -3,3 +3,7 @@ node_modules
 /test/Users/delete_user
 /test/Users/read_user
 /test/Users/update_user
+
+/models/permissionsModel.js
+/models/rolesModel.js
+/models/rolePermissionsModel.js
