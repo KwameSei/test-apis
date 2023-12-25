@@ -114,7 +114,7 @@ class UserController {
       if (!passwordMatch) {
         return res.status(401).json({
           status: 'error',
-          error: 'Invalid email or password'
+          error: 'Invalid password'
         });
       }
 
@@ -133,7 +133,8 @@ class UserController {
             email: emailToLower,
             role: user.role
           }
-        }
+        },
+        message: 'User logged in successfully'
       });
     } catch (error) {
       return res.status(500).json({

@@ -40,13 +40,13 @@ class AppLinksController {
         success: true,
         status: 201,
         message: 'App Link created successfully',
-        data: [{
+        data: {
           id: apps,
           name,
           icon,
           url,
           user_id: userId
-        }]
+        }
       });
     } catch (error) {
       console.error(error);

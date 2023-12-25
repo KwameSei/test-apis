@@ -40,7 +40,7 @@ export default knexConnection;
 
 // NB: To run the server, use either of the command below:
 // NODE_ENV=development yarn dev
-// NODE_ENV=test yarn test
+// NODE_ENV=test yarn test-env
 
 
 

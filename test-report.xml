@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js">
+    <testCase name="Create App Links Operation should create app links" duration="63">
+      <failure message="TypeError: Cannot read properties of undefined (reading &apos;address&apos;)"><![CDATA[TypeError: Cannot read properties of undefined (reading 'address')
+    at Test.serverAddress (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:46:22)
+    at new Test (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/lib/test.js:34:14)
+    at Object.obj.<computed> [as post] (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/supertest/index.js:43:18)
+    at post (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:64:10)
+    at call (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at Generator.tryCatch (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at Generator._invoke [as next] (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at asyncGeneratorStep (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at asyncGeneratorStep (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at _next (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at new Promise (<anonymous>)
+    at Object.<anonymous> (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js:2:1)
+    at Promise.then.completed (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at _runTest (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/run.js:121:9)
+    at run (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/mnt/c/Users/Nat Osei/desktop/projects/test-apis/node_modules/jest-runner/build/runTest.js:444:34)]]></failure>
+    </testCase>
+  </file>
+</testExecutions>

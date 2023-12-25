@@ -1,2 +1,5 @@
 node_modules
 .env
+/test/Users/delete_user
+/test/Users/read_user
+/test/Users/update_user
