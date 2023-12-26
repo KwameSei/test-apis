@@ -13,12 +13,12 @@ const appValidationSchema = yup.object().shape({
 class appLinks {
   // Create AppLinks
 
-  static async createAppLinks(name, icon, url, userId) {
+  static async createApplinks(name, icon, url, userId) {
     try {
       const app_validate = { name, icon, url, user_id: userId };
       await appValidationSchema.validate(app_validate);
 
-      const appLinkId = await knexConnection('app_links').insert(appLinks);
+      const appLinkId = await knexConnection('app_links').insert(app_validate);
       
       return appLinkId;
     } catch (error) {
@@ -95,9 +95,9 @@ class appLinks {
       const app_validate = { name, icon, url, user_id: userId };
       await appValidationSchema.validate(app_validate);
 
-      const appLinks = await knexConnection('app_links').where({ id }).update(appLinks);
+      const apps = await knexConnection('app_links').where({ id }).update(app_validate);
       
-      return appLinks;
+      return apps;
       
     } catch (error) {
       // Handle validation errors

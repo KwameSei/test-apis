@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>13/52</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>5/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/52</span>
+                <span class='fraction'>13/52</span>
             </div>
         
             
@@ -260,29 +260,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -290,9 +280,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -450,20 +450,20 @@
 // Create AppLinks Controller
 class AppLinksController {
   // Create appLinks
-<span class="fstat-no" title="function not covered" >  st</span>atic async createApp(req, res) {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      console.error('Request body', req.body);</span>
+  static async createApp(req, res) {
+    try {
+      console.log('Request body', req.body);
 &nbsp;
-      const { name, url, icon } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-      const userId = <span class="cstat-no" title="statement not covered" >req.user.id;</span>
+      const { name, url, icon } = req.body;
+      const userId = req.user.id;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      console.log('name:', name);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('url:', url);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('icon:', icon);</span>
-<span class="cstat-no" title="statement not covered" >      console.log('userId:', userId);</span>
+      console.log('name:', name);
+      console.log('url:', url);
+      console.log('icon:', icon);
+      console.log('userId:', userId);
     
       // Validate user input
-<span class="cstat-no" title="statement not covered" >      if (!name || !url || !icon) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!name || !url || !icon) {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({</span>
           success: false,
           status: 400,
@@ -472,8 +472,8 @@ class AppLinksController {
       }
 &nbsp;
       // check if app link already exists
-      const appLink = <span class="cstat-no" title="statement not covered" >await appLinks.getAppLinksByName(name);</span>
-<span class="cstat-no" title="statement not covered" >      if (appLink) {</span>
+      const appLink = await appLinks.getAppLinksByName(name);
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (appLink) {
 <span class="cstat-no" title="statement not covered" >        return res.status(409).json({</span>
           success: false,
           status: 409,
@@ -481,9 +481,9 @@ class AppLinksController {
         })
       }
 &nbsp;
-      const apps = <span class="cstat-no" title="statement not covered" >await appLinks.createApplinks(name, icon, url, userId);</span>
+      const apps = await appLinks.createApplinks(name, icon, url, userId);
       
-<span class="cstat-no" title="statement not covered" >      return res.status(201).json({</span>
+      return res.status(201).json({
         success: true,
         status: 201,
         message: 'App Link created successfully',
@@ -496,7 +496,7 @@ class AppLinksController {
         }
       });
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error(error);</span>
+<span class="cstat-no" title="statement not covered" >      console.log(error);</span>
 <span class="cstat-no" title="statement not covered" >      return res.status(500).json({</span>
         success: false,
         status: 500,
@@ -643,7 +643,7 @@ export default AppLinksController;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-25T12:59:05.365Z
+                at 2023-12-26T18:41:57.849Z
             </div>
         <script src="../prettify.js"></script>
         <script>

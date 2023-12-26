@@ -5,7 +5,7 @@ class AppLinksController {
   // Create appLinks
   static async createApp(req, res) {
     try {
-      console.error('Request body', req.body);
+      console.log('Request body', req.body);
 
       const { name, url, icon } = req.body;
       const userId = req.user.id;
@@ -49,7 +49,7 @@ class AppLinksController {
         }
       });
     } catch (error) {
-      console.error(error);
+      console.log(error);
       return res.status(500).json({
         success: false,
         status: 500,

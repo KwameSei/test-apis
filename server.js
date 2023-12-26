@@ -1,11 +1,13 @@
-import app from './app.js';
+import createApp from './app.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-app.listen(process.env.APP_PORT, () => {
+const server = createApp();
+
+server.listen(process.env.APP_PORT, () => {
   console.log('Server is running on port: ', process.env.APP_PORT);
-})
+});
 
 
 // NB: To run the server, use either of the command below:

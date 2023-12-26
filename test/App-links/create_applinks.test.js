@@ -1,9 +1,12 @@
 import supertest from "supertest";
-import app from "../../app.js";
+import createApp from "../../app.js";
 import knexConnection from "../../database/mysql_connect.js";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+// Create app instance
+const server = createApp();
 
 describe("Create App Links Operation", () => {
   beforeAll(async () => {
@@ -18,7 +21,7 @@ describe("Create App Links Operation", () => {
   let authToken;
 
   beforeAll(async () => {
-    const response = await supertest(app)
+    const response = await supertest(server)
       .post("/api/v1/users/login")
       .send({
         email: process.env.LOGIN_USER_EMAIL,
@@ -60,7 +63,7 @@ describe("Create App Links Operation", () => {
 
   it("should create app links", async () => {
     try {
-      const response = await supertest(app)
+      const response = await supertest(server)
         .post("/api/v1/app/create-app-link")
         .set("Authorization", `Bearer ${authToken}`)
         .send({
