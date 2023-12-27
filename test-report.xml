@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/mnt/c/Users/Nat Osei/desktop/projects/test-apis/test/App-links/create_applinks.test.js">
-    <testCase name="Create App Links Operation should create app links" duration="147"/>
+    <testCase name="Create App Links Operation should create app links" duration="171"/>
+    <testCase name="Create App Links Operation should not create app links if the app name already exists" duration="21"/>
+    <testCase name="Create App Links Operation should not create app links if the app name is missing" duration="26"/>
+    <testCase name="Create App Links Operation should not create app links if the app url is missing" duration="38"/>
+    <testCase name="Create App Links Operation should not create app links if the app icon is missing" duration="27"/>
+    <testCase name="Create App Links Operation should not create app links if the app name is empty" duration="30"/>
+    <testCase name="Create App Links Operation should not create app links if the app url is empty" duration="34"/>
+    <testCase name="Create App Links Operation should not create app links if the app icon is empty" duration="45"/>
+    <testCase name="Create App Links Operation should return unauthorized if the user is not logged in" duration="16"/>
+    <testCase name="Create App Links Operation should return unauthorized with invalid token" duration="14"/>
+    <testCase name="Create App Links Operation should return bad request for invalid user input" duration="28"/>
   </file>
 </testExecutions>

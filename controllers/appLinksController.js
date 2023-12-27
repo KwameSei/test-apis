@@ -20,7 +20,16 @@ class AppLinksController {
         return res.status(400).json({
           success: false,
           status: 400,
-          message: 'App Links name, icon and icon required'
+          message: 'App Links name, icon and url required'
+        })
+      }
+
+      // Check for invalid inputs
+      if (typeof name !== 'string' || typeof url !== 'string' || typeof icon !== 'string') {
+        return res.status(409).json({
+          success: false,
+          status: 409,
+          message: "App Links name, icon and icon required, invalid inputs are not allowed"
         })
       }
 

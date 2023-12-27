@@ -33,8 +33,6 @@ describe("Create App Links Operation", () => {
 
     const userData = response.body.data;
 
-    console.log("userData:", userData);
-
     if (!userData.user || !userData.user.id) {
       throw new Error("User data is missing or incorrect");
     }
@@ -52,7 +50,6 @@ describe("Create App Links Operation", () => {
     }
 
     authToken = userData.token;
-    console.log("authToken:", authToken);
 
     expect(user).toHaveProperty("id");
     expect(user).toHaveProperty("name");
@@ -67,22 +64,18 @@ describe("Create App Links Operation", () => {
         .post("/api/v1/app/create-app-link")
         .set("Authorization", `Bearer ${authToken}`)
         .send({
-          name: "Test App",
-          url: "https://testapp.com",
-          icon: "https://testapp.com/test.png",
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
         });
-
-      console.log("create app link response:", response.body);
 
       expect(response.statusCode).toBe(201); // Assuming a successful creation status
       expect(response.body).toHaveProperty("data");
 
       const appData = response.body.data;
 
-      console.log("appData:", appData);
-
       const app = await knexConnection("app_links")
-        .where({ name: "Test App" })
+        .where({ name: process.env.TEST_APP_NAME })
         .first();
 
       expect(app).toBeDefined(); // Assuming the app is found in the database
@@ -97,6 +90,291 @@ describe("Create App Links Operation", () => {
       } else {
         console.error(error);
       }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app name already exists", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      expect(response.statusCode).toBe(409); // Assuming a conflict status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      expect(message).toBe("App already exists");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app name is missing", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app url is missing", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app icon is missing", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app name is empty", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: "",
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app url is empty", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: "",
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should not create app links if the app icon is empty", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+          icon: "",
+        });
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      if (error.message) {
+        console.error(error.message);
+      } else {
+        console.error(error);
+      }
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should return unauthorized if the user is not logged in", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(401); // Assuming an unauthorized status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("Unauthorized! Please provide a valid token");
+    } catch (error) {
+      console.error(error);
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should return unauthorized with invalid token", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}invalid`)
+        .send({
+          name: process.env.TEST_APP_NAME,
+          url: process.env.TEST_APP_URL,
+          icon: process.env.TEST_APP_ICON,
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(401); // Assuming an unauthorized status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("Unauthorized! Please provide a valid token");
+    } catch (error) {
+      console.error(error);
+      throw error; // Re-throw the error to fail the test
+    }
+  });
+
+  it("should return bad request for invalid user input", async () => {
+    try {
+      const response = await supertest(server)
+        .post("/api/v1/app/create-app-link")
+        .set("Authorization", `Bearer ${authToken}`)
+        .send({
+          name: process.env.TEST_INVALID_NAME,
+          url: process.env.TEST_INVALID_URL,
+          icon: process.env.TEST_INVALID_ICON,
+          invalid: "invalid",
+        });
+
+      console.log("create app link response:", response.body);
+
+      expect(response.statusCode).toBe(400); // Assuming a bad request status
+      expect(response.body).toHaveProperty("message");
+
+      const message = response.body.message;
+
+      console.log("message:", message);
+
+      expect(message).toBe("App Links name, icon and url required");
+    } catch (error) {
+      console.error(error);
       throw error; // Re-throw the error to fail the test
     }
   });

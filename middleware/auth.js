@@ -12,8 +12,9 @@ export const authentication = async (req, res, next) => {
 
     if (!token) {
       return res.status(401).json({
-        status: 'error',
-        error: 'Unauthorized! Please provide a token'
+        status: 401,
+        success: false,
+        message: 'Unauthorized! Please provide a token'
       });
     }
 
@@ -40,7 +41,8 @@ export const authentication = async (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       status: 'error',
-      error: 'Please authenticate'
+      success: false,
+      message: 'Unauthorized! Please provide a valid token'
     });
   }
 };
