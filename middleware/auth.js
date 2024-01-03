@@ -42,7 +42,8 @@ export const authentication = async (req, res, next) => {
     return res.status(401).json({
       status: 'error',
       success: false,
-      message: 'Unauthorized! Please provide a valid token'
+      message: 'Unauthorized! Please provide a valid token',
+      error: 'Unauthorized! Please provide a valid token'
     });
   }
 };

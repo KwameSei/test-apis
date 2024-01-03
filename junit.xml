@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="11" failures="0" errors="0" time="53.933">
-  <testsuite name="Create App Links Operation" errors="0" failures="0" skipped="0" timestamp="2023-12-26T20:13:35" time="52.657" tests="11">
-    <testcase classname="Create App Links Operation should create app links" name="Create App Links Operation should create app links" time="0.171">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app name already exists" name="Create App Links Operation should not create app links if the app name already exists" time="0.021">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app name is missing" name="Create App Links Operation should not create app links if the app name is missing" time="0.026">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app url is missing" name="Create App Links Operation should not create app links if the app url is missing" time="0.038">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app icon is missing" name="Create App Links Operation should not create app links if the app icon is missing" time="0.027">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app name is empty" name="Create App Links Operation should not create app links if the app name is empty" time="0.03">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app url is empty" name="Create App Links Operation should not create app links if the app url is empty" time="0.034">
-    </testcase>
-    <testcase classname="Create App Links Operation should not create app links if the app icon is empty" name="Create App Links Operation should not create app links if the app icon is empty" time="0.045">
-    </testcase>
-    <testcase classname="Create App Links Operation should return unauthorized if the user is not logged in" name="Create App Links Operation should return unauthorized if the user is not logged in" time="0.016">
-    </testcase>
-    <testcase classname="Create App Links Operation should return unauthorized with invalid token" name="Create App Links Operation should return unauthorized with invalid token" time="0.014">
-    </testcase>
-    <testcase classname="Create App Links Operation should return bad request for invalid user input" name="Create App Links Operation should return bad request for invalid user input" time="0.028">
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="53.932">
+  <testsuite name="Delete app links operation" errors="0" failures="0" skipped="0" timestamp="2023-12-27T17:59:42" time="52.674" tests="1">
+    <testcase classname="Delete app links operation should delete an app link successfully" name="Delete app links operation should delete an app link successfully" time="0.051">
     </testcase>
   </testsuite>
 </testsuites>

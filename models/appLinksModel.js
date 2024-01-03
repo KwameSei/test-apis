@@ -92,7 +92,7 @@ class appLinks {
 
   static async updateAppLinks(id, name, icon, url, userId) {
     try {
-      const app_validate = { name, icon, url, user_id: userId };
+      const app_validate = {id, name, icon, url, user_id: userId };
       await appValidationSchema.validate(app_validate);
 
       const apps = await knexConnection('app_links').where({ id }).update(app_validate);
